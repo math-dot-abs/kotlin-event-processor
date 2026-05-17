@@ -1,0 +1,31 @@
+{
+  "contractId": "7778881",
+  "processingType": 322,
+  "taxReclamation": 100,
+  "subsidyReclamation": 100,
+  "ratingGender": 1,
+  "partnerIdPolicyHolder": "9000",
+  "effectiveFrom": "01.08.25 00:00",
+  "processingDate": "15.08.25 15:34",
+  "productVariantType": 10019,
+  "priceTier": 100001,
+  "contractParts": [
+    {
+      "surplusApplicationType": 1,
+      "legacyIndicator": 0,
+      "statementGeneration": 100592,
+      "externalFundId": 53,
+      "rateVariantId": 100315,
+      "beneficiary": [
+        {
+          "reserveFund": 100,
+          "valuationReserve": 100,
+          "surplusShare": 100,
+          "finalSurplusShare": 100,
+          "accountNumber": 1,
+          "partnerId": "9000"
+        }
+      ]
+    }
+  ]
+}
