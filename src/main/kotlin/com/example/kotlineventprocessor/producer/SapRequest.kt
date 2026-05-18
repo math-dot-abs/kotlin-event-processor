@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 data class SapRequest(
     val businessPartnerNumber : String,
     val contractId : String,
-    val amount: Double,
+    var amount: Double,
     val mProcess: String?,
     val sProcess: String?,
     val bankRoutingNumber : String,
@@ -17,4 +17,7 @@ data class SapRequest(
     val productGroup : String?,
     val insuranceObject : String,
     val businessPartner : String,
-)
+){
+    fun negateBetrag() {
+        this.amount = this.amount.unaryMinus()
+    }
