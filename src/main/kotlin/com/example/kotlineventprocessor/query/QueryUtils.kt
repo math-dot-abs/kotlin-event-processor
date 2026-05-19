@@ -1,7 +1,11 @@
 package de.inter.lv.exkasso.event.processor.utility
 
-import de.inter.lv.exkasso.event.processor.entity.excelQuery.Query
-import de.inter.lv.exkasso.event.processor.entity.excelQuery.QueryableEntities
+import com.example.kotlineventprocessor.query.FieldName
+import com.example.kotlineventprocessor.query.Operation
+import com.example.kotlineventprocessor.query.Query
+import com.example.kotlineventprocessor.query.QueryableEntity
+import com.example.kotlineventprocessor.query.TableName
+import com.example.kotlineventprocessor.query.Value
 import java.math.BigDecimal
 
 object QueryUtils {
@@ -19,10 +23,10 @@ object QueryUtils {
         val tokens = stringQuery.trim().split(" ", limit = 3)
         val tableAndField = convertStringToTableAndField(tokens[0])
         return Query(
-            QueryableEntities.valueOf(tableAndField[0]),
-            tableAndField.getOrNull(1),
-            tokens.getOrNull(1),
-            tokens.getOrNull(2)
+            TableName(QueryableEntity.valueOf(tableAndField[0])),
+            FieldName(tableAndField.getOrNull(1)),
+            Operation.fromString(tokens.getOrNull(1)),
+            Value(tokens.getOrNull(2))
         )
     }
 
@@ -41,20 +45,10 @@ object QueryUtils {
         val value = query.value ?: throw IllegalArgumentException("Value darf nicht null sein")
 
         return when (operation) {
-            ">" -> result > convertToBigDecimal(value)
-            "==" -> result.compareTo(convertToBigDecimal(value)) == 0
-            "IN" -> convertToBigDecimalList(value).contains(result)
-            "NOTIN" -> !convertToBigDecimalList(value).contains(result)
-            else -> throw IllegalArgumentException("Unsupported Operation: $operation")
+            Operation.GREATER_THAN  -> result > value.convertToBigDecimal()
+            Operation.EQUALS -> result.compareTo(value.convertToBigDecimal()) == 0
+            Operation.IN -> value.convertToBigDecimalList().contains(result)
+            Operation.NOTIN -> value.convertToBigDecimalList().contains(result)
         }
     }
-
-    private fun convertToBigDecimal(value: String): BigDecimal =
-        BigDecimal.valueOf(value.toDouble())
-
-    private fun convertToBigDecimalList(value: String): List<BigDecimal> =
-        value.replace("(", "")
-            .replace(")", "")
-            .split(",")
-            .map { BigDecimal(it) }
 }

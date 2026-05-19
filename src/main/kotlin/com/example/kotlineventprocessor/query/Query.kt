@@ -1,15 +1,41 @@
-package de.inter.lv.exkasso.event.processor.entity.excelQuery
+package com.example.kotlineventprocessor.query
 
-class Query(tableName: QueryableEntities?, fieldName: String?, operation: String?, value: String?) {
-    val tableName: QueryableEntities?
-    val fieldName: String?
-    val operation: String?
-    val value: String?
+import java.math.BigDecimal
 
-    init {
-        this.tableName = tableName
-        this.fieldName = fieldName
-        this.operation = operation
-        this.value = value
+class Query(
+    val tableName: TableName,
+    val fieldName: FieldName?,
+    val operation: Operation?,
+    val value: Value?
+)
+
+@JvmInline
+value class TableName (private val entity : QueryableEntity)
+
+@JvmInline
+value class FieldName (private val s : String?)
+
+enum class Operation (val s : String){
+    GREATER_THAN(">"),
+    EQUALS("=="),
+    IN("IN"),
+    NOTIN("NOTIN");
+
+    companion object {
+        fun fromString(value: String?): Operation? =
+            entries.find { it.s == value }
     }
+}
+
+@JvmInline
+value class Value (private val s : String?){
+    fun convertToBigDecimal(): BigDecimal =
+        BigDecimal.valueOf(s.orEmpty().toDouble())
+
+    fun convertToBigDecimalList(): List<BigDecimal> =
+        s.orEmpty()
+            .replace("(", "")
+            .replace(")", "")
+            .split(",")
+            .map { BigDecimal(it) }
 }
