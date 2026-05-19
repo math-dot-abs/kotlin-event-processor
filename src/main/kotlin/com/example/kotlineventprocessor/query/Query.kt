@@ -3,14 +3,11 @@ package com.example.kotlineventprocessor.query
 import java.math.BigDecimal
 
 class Query(
-    val tableName: TableName,
+    val tableName: QueryableEntity,
     val fieldName: FieldName?,
     val operation: Operation?,
     val value: Value?
 )
-
-@JvmInline
-value class TableName (private val entity : QueryableEntity)
 
 @JvmInline
 value class FieldName (private val s : String?)

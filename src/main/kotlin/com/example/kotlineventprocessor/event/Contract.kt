@@ -9,11 +9,11 @@ data class Contract(
     val subsidyReclamation: Double,
     val ratingGender: Int,
     val partnerIdPolicyHolder: String,
-    var effectiveFrom: LocalDateTime,
-    var processingDate: LocalDateTime,
-    var pickupDate: LocalDateTime,
-    var cancellationDate : LocalDateTime,
-    var acknowledgmentDate : LocalDateTime,
+    val effectiveFrom: LocalDateTime,
+    val processingDate: LocalDateTime,
+    var pickupDate: LocalDateTime?,
+    var cancellationDate : LocalDateTime?,
+    var acknowledgmentDate : LocalDateTime?,
     val productVariantType: Int,
     val priceTier: Int,
     val contractParts: List<ContractPart>,
@@ -21,7 +21,7 @@ data class Contract(
 
 data class ContractPart(
     val surplusApplicationType: Int,
-    val legacyIndicator: Int,
+    val legacyIndicator: Boolean,
     val statementGeneration: Int,
     val externalFundId: Int,
     val rateVariantId: Int,
@@ -33,6 +33,6 @@ data class Beneficiary(
     val valuationReserve: Double,
     val surplusShare: Double,
     val finalSurplusShare: Double,
-    val accountNumber: Int,
+    val bankRoutingNumber: Int,
     val partnerId: String,
 )

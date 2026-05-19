@@ -16,7 +16,7 @@ data class AccountingConfig(
     val id: Long = 0,
     val processingType: Int = 0,
     val query: String = "",
-    val accountId: String = "",
+    val accountId: AccountId? = null,
     val sign: String = "",
     val rLM: String = "",
     val mprocess: String = "",
@@ -24,9 +24,14 @@ data class AccountingConfig(
     val sMaccount: String = "",
     val hMaccount: String = "",
     val productGroup: String = "",
-    val insuranceType: String = "",
+    val insuranceType: String? = null,
     val stockType: String? = null,
     val claimType: String? = null,
     val riskType: String? = null,
     val insuranceTypeLong: String? = null
 )
+
+enum class AccountId {
+    CUSTOMER,
+    STATE
+}

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 class AccountingMapper(val accountingRegistry: AccountingRegistry, val contextPopulator: ContextPopulator) : MapperInterface {
     override fun map(contract: Contract): List<AccountingContext> {
         val configs: List<AccountingConfig> = accountingRegistry.get(contract.processingType)
-        val baseContext = AccountingContext(contract)
+        val baseContext = AccountingContext(contract = contract)
         val resolver = ConfigResolver()
         val results: List<AccountingContext> = resolver.resolve(baseContext, configs)
         results.forEach(contextPopulator::populate)
