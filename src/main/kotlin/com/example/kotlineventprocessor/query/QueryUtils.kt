@@ -1,11 +1,5 @@
-package de.inter.lv.exkasso.event.processor.utility
+package com.example.kotlineventprocessor.query
 
-import com.example.kotlineventprocessor.query.FieldName
-import com.example.kotlineventprocessor.query.Operation
-import com.example.kotlineventprocessor.query.Query
-import com.example.kotlineventprocessor.query.QueryableEntity
-import com.example.kotlineventprocessor.query.TableName
-import com.example.kotlineventprocessor.query.Value
 import java.math.BigDecimal
 
 object QueryUtils {
@@ -23,7 +17,7 @@ object QueryUtils {
         val tokens = stringQuery.trim().split(" ", limit = 3)
         val tableAndField = convertStringToTableAndField(tokens[0])
         return Query(
-            TableName(QueryableEntity.valueOf(tableAndField[0])),
+            QueryableEntity.valueOf(tableAndField[0]),
             FieldName(tableAndField.getOrNull(1)),
             Operation.fromString(tokens.getOrNull(1)),
             Value(tokens.getOrNull(2))

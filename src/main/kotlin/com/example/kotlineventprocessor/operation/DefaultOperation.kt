@@ -7,7 +7,7 @@ import com.example.kotlineventprocessor.producer.SapRequestConverter
 import java.time.LocalDateTime
 import java.util.*
 
-class DefaultOperation(val converter: SapRequestConverter) : OperationInterface{
+class DefaultOperation(val converter: SapRequestConverter) : OperationInterface {
     override fun isSupported(contract: Contract): Boolean {
         return contract.pickupDate == null && contract.cancellationDate == null;
     }
