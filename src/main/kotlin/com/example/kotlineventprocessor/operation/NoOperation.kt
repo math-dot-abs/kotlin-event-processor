@@ -3,9 +3,10 @@ package com.example.kotlineventprocessor.operation
 import com.example.kotlineventprocessor.accounting.AccountingContext
 import com.example.kotlineventprocessor.event.Contract
 import com.example.kotlineventprocessor.producer.SapRequest
+import com.example.kotlineventprocessor.producer.SapRequestConverter
 import java.time.LocalDateTime
 
-class NoOperation(converter: SapRequestConverter) : OperationInterface{
+class NoOperation(val converter: SapRequestConverter) : OperationInterface{
     override fun isSupported(contract: Contract): Boolean {
         return contract.pickupDate == null && contract.cancellationDate != null
     }

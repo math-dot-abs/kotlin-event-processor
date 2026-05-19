@@ -17,7 +17,8 @@ data class SapRequest(
     val productGroup : String?,
     val insuranceObject : String,
     val businessPartner : String,
-){
+) {
     fun negateBetrag() {
         this.amount = this.amount.unaryMinus()
     }
+}
